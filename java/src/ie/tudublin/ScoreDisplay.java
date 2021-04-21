@@ -7,14 +7,14 @@ import processing.core.PApplet;
 
 public class ScoreDisplay extends PApplet
 {
-	String score = "DEFGABcd";
-	//String score = "D2E2F2G2A2B2c2d2";
+	//String score = "DEFGABcd";
+	String score = "D2E2F2G2A2B2c2d2";
 	//String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
 	ArrayList<Note> notes = new ArrayList<>();
-	float cX = width/2;
+	float cX;
 	float cY;
-	float borderW = width * .1f;
-	float borderH = cY - (height * .5f);
+	float borderW;
+	float borderH;
 	float beatWidth = 20;
 
 	public void settings()
@@ -27,6 +27,9 @@ public class ScoreDisplay extends PApplet
 		println(i);
 
 		cY = height/2;
+		borderW = width * .1f;
+		borderH = height * .1f;
+		cX = width/2;
 	}
 
 	public void setup() 
@@ -72,18 +75,16 @@ public class ScoreDisplay extends PApplet
 				position = c;
 			}
 
-			//println(position);
-			float y = map(position, t, t2 + 4 - 25, cY - borderH,  cY + borderH);
+			float y = map(position, t, t2 + 4 - 25, cY + borderH,  cY - borderH);
 
-			//println(y);
 			checkMouse(x+10,y+10,n);
 			text(c, x+10, height*.1f);
 
 			stroke(n.getC(), 0, 0);
 			fill(n.getC(), 0, 0);
 
-			ellipse(x+10, y+10, beatWidth, beatWidth);
-			line(x+20,y+10,x+20,y-50);
+			ellipse(x+beatWidth/2, y+beatWidth/2, beatWidth, beatWidth);
+			line(x+beatWidth,y+beatWidth/2,x+beatWidth,y-50);
 			i++;
 		}
 	}
@@ -103,7 +104,7 @@ public class ScoreDisplay extends PApplet
 					Note n = new Note(c,d);
 					notes.add(n);
 				}
-			}else{
+			}else if(Character.isLetter(c)){
 				d = 1;
 				Note n = new Note(c,d);
 				notes.add(n);
@@ -115,7 +116,6 @@ public class ScoreDisplay extends PApplet
 	void checkMouse(float x, float y, Note n){
 		if(dist(mouseX, mouseY, x , y) < beatWidth/2){
 			n.setC(255);
-			println("AHHHHHHHHHHHHHHHH" + n.getC());
 		}else{
 			n.setC(0);
 		}
@@ -128,6 +128,8 @@ public class ScoreDisplay extends PApplet
 		for(Note n : notes){
 			println(n);
 		}
+
+
 	}
 
 	void drawStaves(){
