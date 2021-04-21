@@ -4,11 +4,13 @@ package ie.tudublin;
 public class Note {
     private char note;
     private int duration;
+    private float c;
 
     
     public Note(char note, int duration) {
         this.note = note;
         this.duration = duration;
+        this. c = 0;
     }
 
     public char getNote() {
@@ -30,7 +32,13 @@ public class Note {
         this.duration = duration;
     }
 
+    public float getC() {
+        return c;
+    }
 
+    public void setC(float c) {
+        this.c = c;
+    }
 
     @Override
     public String toString() {
