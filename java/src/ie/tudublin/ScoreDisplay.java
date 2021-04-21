@@ -8,8 +8,8 @@ import processing.core.PApplet;
 public class ScoreDisplay extends PApplet
 {
 	//String score = "DEFGABcd";
-	String score = "D2E2F2G2A2B2c2d2";
-	//String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
+	//String score = "D2E2F2G2A2B2c2d2";
+	String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
 	ArrayList<Note> notes = new ArrayList<>();
 	float cX;
 	float cY;
@@ -129,6 +129,15 @@ public class ScoreDisplay extends PApplet
 			println(n);
 		}
 
+		for(Note n : notes){
+			print(n.getNote() + "\t" + n.getDuration() + "\t");
+			if(n.getDuration() == 1){
+				println("Quaver");
+			}else{
+				println("Crotchet");
+			}
+
+		}
 
 	}
 
