@@ -8,9 +8,11 @@ import processing.core.PApplet;
 public class ScoreDisplay extends PApplet
 {
 	//String score = "DEFGABcd";
-	String score = "D2E2F2G2A2B2c2d2";
-	//String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
+	//String score = "D2E2F2G2A2B2c2d2";
+	String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
 	ArrayList<Note> notes = new ArrayList<>();
+	float cX = width/2;
+	float cY = height/2;
 
 	public void settings()
 	{
@@ -41,13 +43,19 @@ public class ScoreDisplay extends PApplet
 	}
 
 	void loadScores(){
-
-		for(int i = 0; i < score.length(); i+=2){
+		int d;
+		for(int i = 0; i < score.length(); i++){
 			char c = score.charAt(i);
-			int d = score.charAt(i+1) - '0';
+			if(Character.isLetter(c)){
+				if(Character.isDigit(score.charAt(i+1))){
+					d = score.charAt(i+1) - '0';
+				}else{
+					d = 1;
+				}
 
-			Note n = new Note(c,d);
-			notes.add(n);
+				Note n = new Note(c,d);
+				notes.add(n);
+			}
 		}
 
 	}
@@ -57,5 +65,9 @@ public class ScoreDisplay extends PApplet
 		for(Note n : notes){
 			println(n);
 		}
+	}
+
+	void drawStaves(){
+
 	}
 }
