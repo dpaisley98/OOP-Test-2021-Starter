@@ -12,9 +12,9 @@ public class ScoreDisplay extends PApplet
 	//String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
 	ArrayList<Note> notes = new ArrayList<>();
 	float cX = width/2;
-	float cY = height/2;
+	float cY;
 	float borderW = width * .1f;
-	float borderH = height/2 - (height);
+	float borderH = cY - (height * .5f);
 	float beatWidth = 20;
 
 	public void settings()
@@ -25,6 +25,8 @@ public class ScoreDisplay extends PApplet
 		char c = '7'; // c holds the character 7 (55)
 		int i = c - '0'; // i holds the number 7 (55 - 48) 
 		println(i);
+
+		cY = height/2;
 	}
 
 	public void setup() 
@@ -35,6 +37,7 @@ public class ScoreDisplay extends PApplet
 
 		
 	}
+
 
 	public void draw()
 	{
@@ -70,7 +73,7 @@ public class ScoreDisplay extends PApplet
 			}
 
 			//println(position);
-			float y = map(position, t, t2 + 4 - 25, height/2 - borderH * 2,  height/2);
+			float y = map(position, t, t2 + 4 - 25, cY - borderH,  cY + borderH);
 
 			//println(y);
 			checkMouse(x+10,y+10,n);
@@ -130,8 +133,8 @@ public class ScoreDisplay extends PApplet
 	void drawStaves(){
 		//stroke(0, 0, 0);
 		for(int i = 0; i < 5; i++){
-			float y = map(i, 0, 4, height/2- borderH,  height/2 + borderH);
-			line(width*.1f, cY + y, width-width*.1f, cY + y);
+			float y = map(i, 0, 4, cY - borderH,  cY + borderH);
+			line(width*.1f, y, width-width*.1f, y);
 			//println("Y LINE" + y);
 
 		}
